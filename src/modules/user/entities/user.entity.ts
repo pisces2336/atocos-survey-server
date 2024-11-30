@@ -1,5 +1,11 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @ObjectType()
 @Entity()
@@ -9,7 +15,7 @@ export class User {
   id: string;
 
   @Field()
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Field()
@@ -17,10 +23,10 @@ export class User {
   password: string;
 
   @Field()
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
   @Field()
-  @Column()
+  @UpdateDateColumn()
   updatedAt: Date;
 }
