@@ -24,7 +24,6 @@ export class UserResolver {
   @Query(() => User)
   @UseGuards(JwtAuthGuard)
   me(@Context() context) {
-    console.log(context.user);
     return context.req.user;
   }
 }
