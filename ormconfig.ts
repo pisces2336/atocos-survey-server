@@ -1,7 +1,7 @@
 import 'dotenv/config';
-import { DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
-const ormconfig: DataSourceOptions = {
+export const ormconfig: DataSourceOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT),
@@ -10,8 +10,8 @@ const ormconfig: DataSourceOptions = {
   database: process.env.DB_DATABASE,
   synchronize: false,
   logging: true,
-  entities: ['src/entity/**/*.ts'],
-  migrations: ['src/migration/**/*.ts'],
+  entities: [process.cwd() + '/dist/**/entities/**/*.entity.js'],
+  migrations: [process.cwd() + '/dist/**/migrations/**/*.js'],
 };
 
-export default ormconfig;
+export default new DataSource(ormconfig);
