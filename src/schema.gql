@@ -21,6 +21,7 @@ type LoginUserResponse {
 
 type Query {
   listUser(where: ListUserInput): [User!]!
+  me: User!
 }
 
 input ListUserInput {

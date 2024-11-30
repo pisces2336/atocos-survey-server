@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateUserInput } from './dto/create-user.input';
 import { ListUserInput } from './dto/list-user.input';
@@ -19,5 +19,12 @@ export class UserResolver {
   @UseGuards(JwtAuthGuard)
   listUser(@Args('where', { nullable: true }) where: ListUserInput) {
     return this.userService.findAll(where);
+  }
+
+  @Query(() => User)
+  @UseGuards(JwtAuthGuard)
+  me(@Context() context) {
+    console.log(context.user);
+    return context.req.user;
   }
 }
