@@ -21,7 +21,7 @@ export class UserService {
     return user;
   }
 
-  findAll(where: ListUserInput) {
+  findAll(where: Partial<ListUserInput>) {
     return this.userRepository.find({ where });
   }
 }
