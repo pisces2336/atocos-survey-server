@@ -10,6 +10,8 @@ import { QuestionModule } from './modules/question/question.module';
 import { SurveyModule } from './modules/survey/survey.module';
 import { UserModule } from './modules/user/user.module';
 import { OptionModule } from './modules/option/option.module';
+import { SubmissionModule } from './modules/submission/submission.module';
+import { AnswerModule } from './modules/answer/answer.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { OptionModule } from './modules/option/option.module';
     SurveyModule,
     QuestionModule,
     OptionModule,
+    SubmissionModule,
+    AnswerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
