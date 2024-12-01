@@ -26,8 +26,14 @@ export class SurveyService {
     return survey;
   }
 
-  findAll() {
-    return `This action returns all survey`;
+  async findAll(user: User) {
+    const surveys = await this.surveyRepository
+      .createQueryBuilder('survey')
+      .leftJoinAndSelect('survey.questions', 'question')
+      .leftJoinAndSelect('question.options', 'option')
+      .where('survey.userId = :userId', { userId: user.id })
+      .getMany();
+    return surveys;
   }
 
   findOne(id: number) {

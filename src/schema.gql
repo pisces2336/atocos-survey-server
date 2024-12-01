@@ -53,6 +53,7 @@ type LoginUserResponse {
 type Query {
   listUser(where: ListUserInput): [User!]!
   me: User!
+  listSurvey: [Survey!]!
   survey(id: Int!): Survey!
   question(id: Int!): Question!
   option(id: Int!): Option!

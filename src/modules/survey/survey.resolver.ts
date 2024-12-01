@@ -20,9 +20,11 @@ export class SurveyResolver {
     return this.surveyService.create(user, createSurveyInput);
   }
 
-  @Query(() => [Survey], { name: 'survey' })
-  findAll() {
-    return this.surveyService.findAll();
+  @Query(() => [Survey])
+  @UseGuards(JwtAuthGuard)
+  listSurvey(@Context() context) {
+    const user = context.req.user;
+    return this.surveyService.findAll(user);
   }
 
   @Query(() => Survey, { name: 'survey' })
