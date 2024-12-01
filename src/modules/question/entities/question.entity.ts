@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Answer } from 'src/modules/answer/entities/answer.entity';
 import { Option } from 'src/modules/option/entities/option.entity';
 import { Survey } from 'src/modules/survey/entities/survey.entity';
 import {
@@ -45,4 +46,8 @@ export class Question {
   @Field()
   @OneToMany(() => Option, (option) => option.question)
   options: Option[];
+
+  @Field()
+  @OneToMany(() => Answer, (answer) => answer.question)
+  answers: Answer[];
 }

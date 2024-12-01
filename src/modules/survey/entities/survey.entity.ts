@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Question } from 'src/modules/question/entities/question.entity';
+import { Submission } from 'src/modules/submission/entities/submission.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import {
   Column,
@@ -41,4 +42,8 @@ export class Survey {
   @Field()
   @OneToMany(() => Question, (question) => question.survey)
   questions: Question[];
+
+  @Field()
+  @OneToMany(() => Submission, (submission) => submission.survey)
+  submissions: Submission[];
 }
