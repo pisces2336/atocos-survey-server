@@ -9,7 +9,9 @@ export class SubmissionResolver {
   constructor(private readonly submissionService: SubmissionService) {}
 
   @Mutation(() => Submission)
-  createSubmission(@Args('createSubmissionInput') createSubmissionInput: CreateSubmissionInput) {
+  createSubmission(
+    @Args('createSubmissionInput') createSubmissionInput: CreateSubmissionInput,
+  ) {
     return this.submissionService.create(createSubmissionInput);
   }
 
@@ -24,8 +26,13 @@ export class SubmissionResolver {
   }
 
   @Mutation(() => Submission)
-  updateSubmission(@Args('updateSubmissionInput') updateSubmissionInput: UpdateSubmissionInput) {
-    return this.submissionService.update(updateSubmissionInput.id, updateSubmissionInput);
+  updateSubmission(
+    @Args('updateSubmissionInput') updateSubmissionInput: UpdateSubmissionInput,
+  ) {
+    return this.submissionService.update(
+      updateSubmissionInput.id,
+      updateSubmissionInput,
+    );
   }
 
   @Mutation(() => Submission)
