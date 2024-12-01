@@ -36,8 +36,16 @@ export class SurveyService {
     return surveys;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} survey`;
+  async findOne(id: string) {
+    const survey = await this.surveyRepository
+      .createQueryBuilder('survey')
+      .leftJoinAndSelect('survey.questions', 'question')
+      .leftJoinAndSelect('question.options', 'option')
+      .where('survey.id = :id', { id })
+      .orderBy('question.displayOrder')
+      .addOrderBy('option.displayOrder')
+      .getOne();
+    return survey;
   }
 
   update(id: number, updateSurveyInput: UpdateSurveyInput) {

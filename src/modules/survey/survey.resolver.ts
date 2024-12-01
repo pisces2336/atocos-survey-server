@@ -27,8 +27,8 @@ export class SurveyResolver {
     return this.surveyService.findAll(user);
   }
 
-  @Query(() => Survey, { name: 'survey' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Survey)
+  getSurvey(@Args('id') id: string) {
     return this.surveyService.findOne(id);
   }
 
