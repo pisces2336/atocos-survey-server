@@ -1,7 +1,17 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { MaxLength } from 'class-validator';
+import { CreateQuestionInput } from 'src/modules/question/dto/create-question.input';
 
 @InputType()
 export class CreateSurveyInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field()
+  @MaxLength(255)
+  title: string;
+
+  @Field()
+  @MaxLength(255)
+  description: string;
+
+  @Field()
+  questions: CreateQuestionInput[];
 }

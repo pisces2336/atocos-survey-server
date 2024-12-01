@@ -12,7 +12,7 @@ export class OptionResolver {
   createOption(
     @Args('createOptionInput') createOptionInput: CreateOptionInput,
   ) {
-    return this.optionService.create(createOptionInput);
+    // return this.optionService.create(createOptionInput);
   }
 
   @Query(() => [Option], { name: 'option' })

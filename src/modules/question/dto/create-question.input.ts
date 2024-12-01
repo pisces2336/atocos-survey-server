@@ -1,7 +1,19 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { MaxLength } from 'class-validator';
+import { CreateOptionInput } from 'src/modules/option/dto/create-option.input';
 
 @InputType()
 export class CreateQuestionInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field()
+  displayOrder: number;
+
+  @Field(() => String)
+  type: 'SingleSelection' | 'MultipleSelection' | 'FreeText';
+
+  @Field()
+  @MaxLength(255)
+  questionnaire: string;
+
+  @Field()
+  options: CreateOptionInput[];
 }

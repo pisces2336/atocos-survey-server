@@ -1,7 +1,12 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { MaxLength } from 'class-validator';
 
 @InputType()
 export class CreateOptionInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field()
+  displayOrder: number;
+
+  @Field()
+  @MaxLength(255)
+  label: string;
 }

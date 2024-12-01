@@ -12,7 +12,7 @@ export class QuestionResolver {
   createQuestion(
     @Args('createQuestionInput') createQuestionInput: CreateQuestionInput,
   ) {
-    return this.questionService.create(createQuestionInput);
+    // return this.questionService.create(createQuestionInput);
   }
 
   @Query(() => [Question], { name: 'question' })

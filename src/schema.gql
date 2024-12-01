@@ -2,11 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type Option {
   id: ID!
-  email: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  displayOrder: Float!
+  label: String!
+  question: Question!
 }
 
 """
@@ -14,24 +16,38 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type LoginUserResponse {
-  accessToken: String!
-  user: User!
-}
-
 type Question {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  survey: Survey!
+  displayOrder: Float!
+  type: String!
+  questionnaire: String!
+  options: [Option!]!
 }
 
 type Survey {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User!
+  title: String!
+  description: String!
+  questions: [Question!]!
 }
 
-type Option {
-  """Example field (placeholder)"""
-  exampleField: Int!
+type User {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String!
+  surveys: [Survey!]!
+}
+
+type LoginUserResponse {
+  accessToken: String!
+  user: User!
 }
 
 type Query {
@@ -72,34 +88,40 @@ input LoginUserInput {
 }
 
 input CreateSurveyInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateSurveyInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  title: String!
+  description: String!
+  questions: [CreateQuestionInput!]!
 }
 
 input CreateQuestionInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateQuestionInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  displayOrder: Float!
+  type: String!
+  questionnaire: String!
+  options: [CreateOptionInput!]!
 }
 
 input CreateOptionInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  displayOrder: Float!
+  label: String!
+}
+
+input UpdateSurveyInput {
+  title: String
+  description: String
+  questions: [CreateQuestionInput!]
+  id: Int!
+}
+
+input UpdateQuestionInput {
+  displayOrder: Float
+  type: String
+  questionnaire: String
+  options: [CreateOptionInput!]
+  id: Int!
 }
 
 input UpdateOptionInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  displayOrder: Float
+  label: String
   id: Int!
 }
