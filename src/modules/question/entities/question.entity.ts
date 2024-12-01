@@ -1,7 +1,48 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Option } from 'src/modules/option/entities/option.entity';
+import { Survey } from 'src/modules/survey/entities/survey.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @ObjectType()
+@Entity()
 export class Question {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => ID)
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Field()
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @Field()
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @Field()
+  @ManyToOne(() => Survey, (survey) => survey.questions)
+  survey: Survey;
+
+  @Field()
+  @Column()
+  displayOrder: number;
+
+  @Field(() => String)
+  @Column()
+  type: 'SingleSelection' | 'MultipleSelection' | 'FreeText';
+
+  @Field()
+  @Column()
+  questionnaire: string;
+
+  @Field()
+  @OneToMany(() => Option, (option) => option.question)
+  options: Option[];
 }

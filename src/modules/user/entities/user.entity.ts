@@ -1,8 +1,10 @@
 import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
+import { Survey } from 'src/modules/survey/entities/survey.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -15,6 +17,14 @@ export class User {
   id: string;
 
   @Field()
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @Field()
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @Field()
   @Column({ unique: true })
   email: string;
 
@@ -23,10 +33,6 @@ export class User {
   password: string;
 
   @Field()
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @Field()
-  @UpdateDateColumn()
-  updatedAt: Date;
+  @OneToMany(() => Survey, (survey) => survey.user)
+  surveys: Survey[];
 }
