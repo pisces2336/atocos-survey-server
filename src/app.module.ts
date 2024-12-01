@@ -5,8 +5,11 @@ import gqlconfig from 'gqlconfig';
 import { ormconfig } from 'ormconfig';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { QuestionModule } from './modules/question/question.module';
+import { SurveyModule } from './modules/survey/survey.module';
+import { UserModule } from './modules/user/user.module';
+import { OptionModule } from './modules/option/option.module';
 
 @Module({
   imports: [
@@ -14,6 +17,9 @@ import { AuthModule } from './modules/auth/auth.module';
     GraphQLModule.forRoot(gqlconfig),
     UserModule,
     AuthModule,
+    SurveyModule,
+    QuestionModule,
+    OptionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -19,9 +19,27 @@ type LoginUserResponse {
   user: User!
 }
 
+type Question {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Survey {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Option {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   listUser(where: ListUserInput): [User!]!
   me: User!
+  survey(id: Int!): Survey!
+  question(id: Int!): Question!
+  option(id: Int!): Option!
 }
 
 input ListUserInput {
@@ -32,6 +50,15 @@ input ListUserInput {
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   login(loginUserInput: LoginUserInput!): LoginUserResponse!
+  createSurvey(createSurveyInput: CreateSurveyInput!): Survey!
+  updateSurvey(updateSurveyInput: UpdateSurveyInput!): Survey!
+  removeSurvey(id: Int!): Survey!
+  createQuestion(createQuestionInput: CreateQuestionInput!): Question!
+  updateQuestion(updateQuestionInput: UpdateQuestionInput!): Question!
+  removeQuestion(id: Int!): Question!
+  createOption(createOptionInput: CreateOptionInput!): Option!
+  updateOption(updateOptionInput: UpdateOptionInput!): Option!
+  removeOption(id: Int!): Option!
 }
 
 input CreateUserInput {
@@ -42,4 +69,37 @@ input CreateUserInput {
 input LoginUserInput {
   email: String!
   password: String!
+}
+
+input CreateSurveyInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateSurveyInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateQuestionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateQuestionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateOptionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateOptionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
