@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { CreateUserInput } from './dto/create-user.input';
-import { ListUserInput } from './dto/list-user.input';
 import { User } from './entities/user.entity';
 
 @Injectable()
@@ -20,7 +19,20 @@ export class UserService {
     return user;
   }
 
-  findAll(where: Partial<ListUserInput>) {
-    return this.userRepository.find({ where });
+  async findOneByEmail(email: string) {
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .where('user.email = :email', { email })
+      .getOne();
+    return user;
+  }
+
+  async findOneById(id: string) {
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.surveys', 'survey')
+      .where('user.id = :id', { id })
+      .getOne();
+    return user;
   }
 }

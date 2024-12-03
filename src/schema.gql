@@ -71,16 +71,9 @@ type LoginUserResponse {
 }
 
 type Query {
-  listUser(where: ListUserInput): [User!]!
   me: User!
-  listSurvey: [Survey!]!
   getSurvey(id: String!): Survey!
   getAlreadySubmitted(surveyId: String!, ipAddress: String!): Boolean!
-}
-
-input ListUserInput {
-  id: String
-  email: String
 }
 
 type Mutation {

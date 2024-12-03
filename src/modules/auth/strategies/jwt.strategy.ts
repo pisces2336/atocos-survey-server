@@ -18,10 +18,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     email: string;
     sub: string;
   }): Promise<User | null> {
-    const users = await this.usersService.findAll({ email: payload.email });
-    if (!users) {
+    const user = await this.usersService.findOneByEmail(payload.email);
+    if (!user) {
       return null;
     }
-    return users[0];
+    return user;
   }
 }
