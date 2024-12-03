@@ -41,6 +41,7 @@ export class SurveyService {
       .createQueryBuilder('survey')
       .leftJoinAndSelect('survey.questions', 'question')
       .leftJoinAndSelect('question.options', 'option')
+      .leftJoinAndSelect('question.answers', 'answer')
       .where('survey.id = :id', { id })
       .orderBy('question.displayOrder')
       .addOrderBy('option.displayOrder')
