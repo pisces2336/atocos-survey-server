@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { QuestionService } from '../question/question.service';
 import { SubmissionService } from '../submission/submission.service';
 import { CreateAnswerInput } from './dto/create-answer.input';
-import { UpdateAnswerInput } from './dto/update-answer.input';
 import { Answer } from './entities/answer.entity';
 
 @Injectable()
@@ -39,21 +38,5 @@ export class AnswerService {
       result.push(answer);
     }
     return result;
-  }
-
-  findAll() {
-    return `This action returns all answer`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} answer`;
-  }
-
-  update(id: number, updateAnswerInput: UpdateAnswerInput) {
-    return `This action updates a #${id} answer`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} answer`;
   }
 }

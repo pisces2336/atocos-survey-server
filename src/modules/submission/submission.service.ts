@@ -9,7 +9,6 @@ import { Repository } from 'typeorm';
 import { AnswerService } from '../answer/answer.service';
 import { SurveyService } from '../survey/survey.service';
 import { CreateSubmissionInput } from './dto/create-submission.input';
-import { UpdateSubmissionInput } from './dto/update-submission.input';
 import { Submission } from './entities/submission.entity';
 
 @Injectable()
@@ -48,10 +47,6 @@ export class SubmissionService {
     return submission;
   }
 
-  findAll() {
-    return `This action returns all submission`;
-  }
-
   async findOne(id: string) {
     const submission = await this.submissionRepository
       .createQueryBuilder('submission')
@@ -70,13 +65,5 @@ export class SubmissionService {
       .andWhere('ipAddress = :ipAddress', { ipAddress })
       .getExists();
     return exists;
-  }
-
-  update(id: number, updateSubmissionInput: UpdateSubmissionInput) {
-    return `This action updates a #${id} submission`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} submission`;
   }
 }

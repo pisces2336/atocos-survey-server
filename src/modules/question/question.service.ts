@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { OptionService } from '../option/option.service';
 import { Survey } from '../survey/entities/survey.entity';
 import { CreateQuestionInput } from './dto/create-question.input';
-import { UpdateQuestionInput } from './dto/update-question.input';
 import { Question } from './entities/question.entity';
 
 @Injectable()
@@ -35,10 +34,6 @@ export class QuestionService {
     return result;
   }
 
-  findAll() {
-    return `This action returns all question`;
-  }
-
   async findOne(id: string) {
     const question = await this.questionRepository
       .createQueryBuilder('question')
@@ -48,13 +43,5 @@ export class QuestionService {
       .where({ id })
       .getOne();
     return question;
-  }
-
-  update(id: number, updateQuestionInput: UpdateQuestionInput) {
-    return `This action updates a #${id} question`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} question`;
   }
 }

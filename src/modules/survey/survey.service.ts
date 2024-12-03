@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { QuestionService } from '../question/question.service';
 import { User } from '../user/entities/user.entity';
 import { CreateSurveyInput } from './dto/create-survey.input';
-import { UpdateSurveyInput } from './dto/update-survey.input';
 import { Survey } from './entities/survey.entity';
 
 @Injectable()
@@ -47,13 +46,5 @@ export class SurveyService {
       .addOrderBy('option.displayOrder')
       .getOne();
     return survey;
-  }
-
-  update(id: number, updateSurveyInput: UpdateSurveyInput) {
-    return `This action updates a #${id} survey`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} survey`;
   }
 }

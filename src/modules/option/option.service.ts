@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Question } from '../question/entities/question.entity';
 import { CreateOptionInput } from './dto/create-option.input';
-import { UpdateOptionInput } from './dto/update-option.input';
 import { Option } from './entities/option.entity';
 
 @Injectable()
@@ -27,21 +26,5 @@ export class OptionService {
       result.push(option);
     }
     return result;
-  }
-
-  findAll() {
-    return `This action returns all option`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} option`;
-  }
-
-  update(id: number, updateOptionInput: UpdateOptionInput) {
-    return `This action updates a #${id} option`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} option`;
   }
 }
