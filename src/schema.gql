@@ -2,68 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Option {
+type User {
   id: ID!
+  email: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  displayOrder: Float!
-  label: String!
-  question: Question!
 }
 
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
-
-type Submission {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  survey: Survey!
-  ipAddress: String!
-  answers: [Answer!]!
-}
-
-type Answer {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  submission: Submission!
-  question: Question!
-  answerText: String!
-}
-
-type Question {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  survey: Survey!
-  displayOrder: Float!
-  type: String!
-  questionnaire: String!
-  options: [Option!]!
-  answers: [Answer!]!
-}
-
-type Survey {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  user: User!
-  title: String!
-  description: String!
-  questions: [Question!]!
-  submissions: [Submission!]!
-}
-
-type User {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  email: String!
-  surveys: [Survey!]!
-}
 
 type LoginUserResponse {
   accessToken: String!
@@ -73,13 +22,6 @@ type LoginUserResponse {
 type Query {
   listUser(where: ListUserInput): [User!]!
   me: User!
-  listSurvey: [Survey!]!
-  getSurvey(id: String!): Survey!
-  question(id: Int!): Question!
-  option(id: Int!): Option!
-  submission(id: Int!): Submission!
-  getAlreadySubmitted(surveyId: String!, ipAddress: String!): Boolean!
-  answer(id: Int!): Answer!
 }
 
 input ListUserInput {
@@ -90,21 +32,6 @@ input ListUserInput {
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   login(loginUserInput: LoginUserInput!): LoginUserResponse!
-  createSurvey(createSurveyInput: CreateSurveyInput!): Survey!
-  updateSurvey(updateSurveyInput: UpdateSurveyInput!): Survey!
-  removeSurvey(id: Int!): Survey!
-  createQuestion(createQuestionInput: CreateQuestionInput!): Question!
-  updateQuestion(updateQuestionInput: UpdateQuestionInput!): Question!
-  removeQuestion(id: Int!): Question!
-  createOption(createOptionInput: CreateOptionInput!): Option!
-  updateOption(updateOptionInput: UpdateOptionInput!): Option!
-  removeOption(id: Int!): Option!
-  createSubmission(createSubmissionInput: CreateSubmissionInput!): Submission!
-  updateSubmission(updateSubmissionInput: UpdateSubmissionInput!): Submission!
-  removeSubmission(id: Int!): Submission!
-  createAnswer(createAnswerInput: CreateAnswerInput!): Answer!
-  updateAnswer(updateAnswerInput: UpdateAnswerInput!): Answer!
-  removeAnswer(id: Int!): Answer!
 }
 
 input CreateUserInput {
@@ -115,69 +42,4 @@ input CreateUserInput {
 input LoginUserInput {
   email: String!
   password: String!
-}
-
-input CreateSurveyInput {
-  title: String!
-  description: String!
-  questions: [CreateQuestionInput!]!
-}
-
-input CreateQuestionInput {
-  displayOrder: Float!
-  type: String!
-  questionnaire: String!
-  options: [CreateOptionInput!]!
-}
-
-input CreateOptionInput {
-  displayOrder: Float!
-  label: String!
-}
-
-input UpdateSurveyInput {
-  title: String
-  description: String
-  questions: [CreateQuestionInput!]
-  id: Int!
-}
-
-input UpdateQuestionInput {
-  displayOrder: Float
-  type: String
-  questionnaire: String
-  options: [CreateOptionInput!]
-  id: Int!
-}
-
-input UpdateOptionInput {
-  displayOrder: Float
-  label: String
-  id: Int!
-}
-
-input CreateSubmissionInput {
-  surveyId: String!
-  ipAddress: String!
-  answers: [CreateAnswerInput!]!
-}
-
-input CreateAnswerInput {
-  submissionId: String
-  questionId: String!
-  answerText: String!
-}
-
-input UpdateSubmissionInput {
-  surveyId: String
-  ipAddress: String
-  answers: [CreateAnswerInput!]
-  id: Int!
-}
-
-input UpdateAnswerInput {
-  submissionId: String
-  questionId: String
-  answerText: String
-  id: Int!
 }
