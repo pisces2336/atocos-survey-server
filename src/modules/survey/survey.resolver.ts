@@ -36,7 +36,7 @@ export class SurveyResolver {
   updateSurvey(
     @Args('updateSurveyInput') updateSurveyInput: UpdateSurveyInput,
   ) {
-    return this.surveyService.update(updateSurveyInput.id, updateSurveyInput);
+    // return this.surveyService.update(updateSurveyInput.id, updateSurveyInput);
   }
 
   @Mutation(() => Survey)
