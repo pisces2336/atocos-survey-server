@@ -26,9 +26,10 @@ export class SubmissionService {
 
   async create(createSubmissionInput: CreateSubmissionInput) {
     // 同一IPアドレスからの回答は拒否する
-    const submissionExists = await this.submissionRepository.exists({
-      where: { ipAddress: createSubmissionInput.ipAddress },
-    });
+    const submissionExists = await this.getAlreadySubmitted(
+      createSubmissionInput.surveyId,
+      createSubmissionInput.ipAddress,
+    );
     if (submissionExists) {
       throw new BadRequestException('同一IPアドレスからの回答が存在します。');
     }
@@ -61,10 +62,13 @@ export class SubmissionService {
     return submission;
   }
 
-  async getExistsByIpAddress(ipAddress: string) {
-    const exists = await this.submissionRepository.exists({
-      where: { ipAddress },
-    });
+  async getAlreadySubmitted(surveyId: string, ipAddress: string) {
+    const exists = await this.submissionRepository
+      .createQueryBuilder('submission')
+      .leftJoin('submission.survey', 'survey')
+      .where('survey.id = :surveyId', { surveyId })
+      .andWhere('ipAddress = :ipAddress', { ipAddress })
+      .getExists();
     return exists;
   }
 

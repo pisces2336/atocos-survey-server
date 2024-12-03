@@ -26,8 +26,11 @@ export class SubmissionResolver {
   }
 
   @Query(() => Boolean)
-  alreadySubmitted(@Args('ipAddress') ipAddress: string) {
-    return this.submissionService.getExistsByIpAddress(ipAddress);
+  getAlreadySubmitted(
+    @Args('surveyId') surveyId: string,
+    @Args('ipAddress') ipAddress: string,
+  ) {
+    return this.submissionService.getAlreadySubmitted(surveyId, ipAddress);
   }
 
   @Mutation(() => Submission)
