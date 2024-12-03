@@ -1,17 +1,17 @@
-import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
-import { Survey } from 'src/modules/survey/entities/survey.entity';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Question } from 'src/modules/question/entities/question.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @ObjectType()
 @Entity()
-export class User {
+export class Option {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -25,14 +25,14 @@ export class User {
   updatedAt: Date;
 
   @Field()
-  @Column({ unique: true })
-  email: string;
-
-  @HideField()
   @Column()
-  password: string;
+  displayOrder: number;
 
   @Field()
-  @OneToMany(() => Survey, (survey) => survey.user)
-  surveys: Survey[];
+  @Column()
+  label: string;
+
+  @Field()
+  @ManyToOne(() => Question, (question) => question.options)
+  question: Question;
 }
