@@ -1,9 +1,11 @@
-import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Answer } from 'src/modules/answer/entities/answer.entity';
 import { Survey } from 'src/modules/survey/entities/survey.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -11,7 +13,7 @@ import {
 
 @ObjectType()
 @Entity()
-export class User {
+export class Submission {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -25,14 +27,14 @@ export class User {
   updatedAt: Date;
 
   @Field()
-  @Column({ unique: true })
-  email: string;
-
-  @HideField()
-  @Column()
-  password: string;
+  @ManyToOne(() => Survey, (survey) => survey.submissions)
+  survey: Survey;
 
   @Field()
-  @OneToMany(() => Survey, (survey) => survey.user)
-  surveys: Survey[];
+  @Column()
+  ipAddress: string;
+
+  @Field()
+  @OneToMany(() => Answer, (answer) => answer.submission)
+  answers: Answer[];
 }
