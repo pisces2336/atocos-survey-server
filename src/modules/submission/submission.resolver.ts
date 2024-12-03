@@ -1,8 +1,8 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { SubmissionService } from './submission.service';
-import { Submission } from './entities/submission.entity';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateSubmissionInput } from './dto/create-submission.input';
 import { UpdateSubmissionInput } from './dto/update-submission.input';
+import { Submission } from './entities/submission.entity';
+import { SubmissionService } from './submission.service';
 
 @Resolver(() => Submission)
 export class SubmissionResolver {
@@ -22,7 +22,12 @@ export class SubmissionResolver {
 
   @Query(() => Submission, { name: 'submission' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.submissionService.findOne(id);
+    // return this.submissionService.findOne(id);
+  }
+
+  @Query(() => Boolean)
+  alreadySubmitted(@Args('ipAddress') ipAddress: string) {
+    return this.submissionService.getExistsByIpAddress(ipAddress);
   }
 
   @Mutation(() => Submission)

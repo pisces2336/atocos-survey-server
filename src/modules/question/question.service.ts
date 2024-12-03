@@ -39,8 +39,15 @@ export class QuestionService {
     return `This action returns all question`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} question`;
+  async findOne(id: string) {
+    const question = await this.questionRepository
+      .createQueryBuilder('question')
+      .leftJoinAndSelect('question.survey', 'survey')
+      .leftJoinAndSelect('question.options', 'option')
+      .leftJoinAndSelect('question.answers', 'answer')
+      .where({ id })
+      .getOne();
+    return question;
   }
 
   update(id: number, updateQuestionInput: UpdateQuestionInput) {
